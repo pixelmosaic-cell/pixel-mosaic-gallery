@@ -33,6 +33,7 @@
       border-bottom: 1px solid #e8e0d8;
       padding: 32px 48px 28px;
       text-align: center;
+      position: relative;
     }
     .site-title {
       font-size: 13px;
@@ -48,11 +49,41 @@
       color: var(--text);
       margin-bottom: 10px;
     }
-    .site-name strong { font-weight: 600; }
     .site-desc {
       font-size: 13px;
       color: var(--muted);
       letter-spacing: 0.06em;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .lang-btn {
+      background: none;
+      border: none;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      cursor: pointer;
+      padding: 4px 8px;
+      border-radius: 20px;
+      font-family: inherit;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn:hover { color: var(--text); }
+    .lang-btn.active {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+    .lang-sep {
+      font-size: 11px;
+      color: #d4c8be;
     }
 
     .catchphrase {
@@ -299,52 +330,62 @@
       header { padding: 24px 20px 20px; }
       .catchphrase { padding: 12px 20px; }
       .site-name { font-size: 28px; }
+      .lang-switcher { top: 12px; right: 12px; }
     }
   </style>
 </head>
 <body>
 
 <header>
+  <div class="lang-switcher">
+    <button class="lang-btn active" id="btn-ja" onclick="setLang('ja')">日本語</button>
+    <span class="lang-sep">|</span>
+    <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+  </div>
   <div class="site-title">Handcrafted Mosaic Art</div>
-  <div class="site-name">ピクセルモザイクタイルアート</div>
+  <div class="site-name" data-ja="ピクセルモザイクタイルアート" data-en="Pixel Mosaic Tile Art">ピクセルモザイクタイルアート</div>
   <div class="site-desc">9 Designs &middot; 66 Color Variations</div>
 </header>
 
-<div class="catchphrase">ピクセルモザイクタイルアート &mdash; ドット絵のような温かみと、タイルの魅力的な質感</div>
+<div class="catchphrase"
+  data-ja="ピクセルモザイクタイルアート &mdash; ドット絵のような温かみと、タイルの魅力的な質感"
+  data-en="Pixel Mosaic Tile Art &mdash; Warmth of pixel art with the captivating texture of tiles">
+  ピクセルモザイクタイルアート &mdash; ドット絵のような温かみと、タイルの魅力的な質感
+</div>
 
 <main>
 
   <!-- Products Section -->
   <section class="products-section">
     <div class="section-label">
-      <h2>製品ラインナップ</h2>
+      <h2 data-ja="製品ラインナップ" data-en="Product Lineup">製品ラインナップ</h2>
     </div>
     <div class="products-grid">
       <div class="product-item">
-        <div class="product-name">ペット用ひんやりマット</div>
+        <div class="product-name" data-ja="ペット用ひんやりマット" data-en="Pet Cooling Mat">ペット用ひんやりマット</div>
       </div>
       <div class="product-item">
-        <div class="product-name">インテリアアートパネル</div>
+        <div class="product-name" data-ja="インテリアアートパネル" data-en="Interior Art Panel">インテリアアートパネル</div>
       </div>
       <div class="product-item">
-        <div class="product-name">店舗・スモールビジネス看板</div>
+        <div class="product-name" data-ja="店舗・スモールビジネス看板" data-en="Shop &amp; Small Business Signage">店舗・スモールビジネス看板</div>
       </div>
       <div class="product-item">
-        <div class="product-name">ミニテーブル天板</div>
+        <div class="product-name" data-ja="ミニテーブル天板" data-en="Mini Table Top">ミニテーブル天板</div>
       </div>
       <div class="product-item">
-        <div class="product-name">DIYまたは施工用シート状モザイクタイル</div>
-        <div class="product-badge">裏ネット仕様</div>
+        <div class="product-name" data-ja="DIYまたは施工用シート状モザイクタイル" data-en="DIY or Installation Sheet Mosaic Tiles">DIYまたは施工用シート状モザイクタイル</div>
+        <div class="product-badge" data-ja="裏ネット仕様" data-en="Mesh-backed">裏ネット仕様</div>
       </div>
       <div class="product-item">
-        <div class="product-name">大型壁画アート（ホテル・旅館・サウナ・温泉施設向け）</div>
-        <div class="product-badge">今後展開予定</div>
+        <div class="product-name" data-ja="大型壁画アート（ホテル・旅館・サウナ・温泉施設向け）" data-en="Large-scale Mural Art (for Hotels, Ryokans, Saunas, Hot Springs)">大型壁画アート（ホテル・旅館・サウナ・温泉施設向け）</div>
+        <div class="product-badge" data-ja="今後展開予定" data-en="Coming Soon">今後展開予定</div>
       </div>
     </div>
   </section>
 
   <div class="section-label">
-    <h2>Design Collections</h2>
+    <h2 data-ja="デザインギャラリー" data-en="Design Gallery">デザインギャラリー</h2>
   </div>
 
   <div class="design-grid">
@@ -364,8 +405,8 @@
       <div class="card-body">
         <div class="card-name">Artcafe</div>
         <div class="card-meta">
-          <div class="card-count">8 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="8 色" data-en="8 colors">8 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -385,8 +426,8 @@
       <div class="card-body">
         <div class="card-name">Bella</div>
         <div class="card-meta">
-          <div class="card-count">9 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="9 色" data-en="9 colors">9 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -406,8 +447,8 @@
       <div class="card-body">
         <div class="card-name">Cooper</div>
         <div class="card-meta">
-          <div class="card-count">7 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="7 色" data-en="7 colors">7 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -427,8 +468,8 @@
       <div class="card-body">
         <div class="card-name">Luna</div>
         <div class="card-meta">
-          <div class="card-count">6 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="6 色" data-en="6 colors">6 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -448,8 +489,8 @@
       <div class="card-body">
         <div class="card-name">Mashroom</div>
         <div class="card-meta">
-          <div class="card-count">8 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="8 色" data-en="8 colors">8 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -469,8 +510,8 @@
       <div class="card-body">
         <div class="card-name">Shine Hills</div>
         <div class="card-meta">
-          <div class="card-count">8 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="8 色" data-en="8 colors">8 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -490,8 +531,8 @@
       <div class="card-body">
         <div class="card-name">Sparkle</div>
         <div class="card-meta">
-          <div class="card-count">6 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="6 色" data-en="6 colors">6 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -511,8 +552,8 @@
       <div class="card-body">
         <div class="card-name">Tulip Mania</div>
         <div class="card-meta">
-          <div class="card-count">8 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="8 色" data-en="8 colors">8 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -532,8 +573,8 @@
       <div class="card-body">
         <div class="card-name">Twinkle</div>
         <div class="card-meta">
-          <div class="card-count">6 colors</div>
-          <div class="card-cta">View &rarr;</div>
+          <div class="card-count" data-ja="6 色" data-en="6 colors">6 色</div>
+          <div class="card-cta" data-ja="詳細へ &rarr;" data-en="View &rarr;">詳細へ &rarr;</div>
         </div>
       </div>
     </a>
@@ -543,36 +584,69 @@
   <!-- Channels Section -->
   <section class="channels-section">
     <div class="section-label">
-      <h2>販売チャネル</h2>
+      <h2 data-ja="販売チャネル" data-en="Sales Channels">販売チャネル</h2>
     </div>
     <div class="channels-grid">
       <div class="channel-item">
         <div class="channel-name">Creema</div>
-        <a class="channel-link" href="https://www.creema.jp/item/19535965/detail" target="_blank" rel="noopener">ショップへ &rarr;</a>
+        <a class="channel-link" href="https://www.creema.jp/item/19535965/detail" target="_blank" rel="noopener"
+          data-ja="ショップへ &rarr;" data-en="Shop &rarr;">ショップへ &rarr;</a>
       </div>
       <div class="channel-item">
         <div class="channel-name">Etsy</div>
-        <a class="channel-link" href="https://mosaicnatsuko.etsy.com" target="_blank" rel="noopener">ショップへ &rarr;</a>
+        <a class="channel-link" href="https://mosaicnatsuko.etsy.com" target="_blank" rel="noopener"
+          data-ja="ショップへ &rarr;" data-en="Shop &rarr;">ショップへ &rarr;</a>
       </div>
       <div class="channel-item">
         <div class="channel-name">BASE</div>
-        <div class="channel-status">準備中</div>
+        <div class="channel-status" data-ja="準備中" data-en="Coming Soon">準備中</div>
       </div>
       <div class="channel-item">
-        <div class="channel-name">大型オーダー</div>
-        <div class="channel-note">大型オーダーはお問い合わせください</div>
-        <a class="channel-link" href="https://www.tile-shop-gaudi.com/inquiry/" target="_blank" rel="noopener">お問い合わせ &rarr;</a>
+        <div class="channel-name" data-ja="大型オーダー" data-en="Large Orders">大型オーダー</div>
+        <div class="channel-note" data-ja="大型オーダーはお問い合わせください" data-en="For large custom orders, please contact us">大型オーダーはお問い合わせください</div>
+        <a class="channel-link" href="https://www.tile-shop-gaudi.com/inquiry/" target="_blank" rel="noopener"
+          data-ja="お問い合わせ &rarr;" data-en="Contact &rarr;">お問い合わせ &rarr;</a>
       </div>
     </div>
   </section>
 
-  <p class="shop-note">まだ全ての種類をショップにアップロード出来ていませんので、ご注文の際にはこのサイトで種類を確認してください。</p>
+  <p class="shop-note"
+    data-ja="まだ全ての種類をショップにアップロード出来ていませんので、ご注文の際にはこのサイトで種類を確認してください。"
+    data-en="Not all designs are uploaded to the shops yet. Please check this site for the full range before placing an order.">
+    まだ全ての種類をショップにアップロード出来ていませんので、ご注文の際にはこのサイトで種類を確認してください。
+  </p>
 
 </main>
 
 <footer>
   &copy; Tile shop Gaudi
 </footer>
+
+<script>
+  function applyLang(lang) {
+    // Update all translatable elements
+    document.querySelectorAll('[data-ja][data-en]').forEach(function(el) {
+      el.innerHTML = el.getAttribute('data-' + lang);
+    });
+    // Update html lang attribute
+    document.documentElement.lang = lang;
+    // Update button states
+    document.getElementById('btn-ja').classList.toggle('active', lang === 'ja');
+    document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+    // Save to localStorage
+    localStorage.setItem('lang', lang);
+  }
+
+  function setLang(lang) {
+    applyLang(lang);
+  }
+
+  // On page load, restore saved language
+  (function() {
+    var saved = localStorage.getItem('lang') || 'ja';
+    applyLang(saved);
+  })();
+</script>
 
 </body>
 </html>
