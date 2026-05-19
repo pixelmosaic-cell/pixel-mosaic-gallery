@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cooper — Natsuko Mosaic</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #f7f4f0; --surface: #fff; --text: #2c2824; --muted: #9a8f87; --accent: #c8a97e; --accent-dark: #9a7040; --radius: 12px; --shadow: 0 2px 16px rgba(44,36,28,.10); --shadow-hover: 0 8px 32px rgba(44,36,28,.18); }
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif; background: var(--bg); color: var(--text); }
+    header { background: var(--surface); border-bottom: 1px solid #e8e0d8; padding: 0 48px; display: flex; align-items: center; height: 64px; gap: 24px; }
+    .back-btn { font-size: 13px; color: var(--accent-dark); text-decoration: none; letter-spacing: .06em; transition: opacity .2s; }
+    .back-btn:hover { opacity: .7; }
+    .breadcrumb { font-size: 13px; color: var(--muted); }
+    .breadcrumb span { color: var(--text); font-weight: 500; }
+    main { max-width: 1280px; margin: 0 auto; padding: 56px 32px 100px; }
+    .page-hero { display: flex; align-items: flex-end; gap: 40px; margin-bottom: 52px; }
+    .hero-img { width: 220px; height: 220px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); flex-shrink: 0; }
+    .hero-text h1 { font-size: 48px; font-weight: 200; letter-spacing: .1em; margin-bottom: 10px; }
+    .hero-text .count { font-size: 14px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: transform .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #ece8e2; }
+    .card-info { padding: 10px 14px 12px; }
+    .card-label { font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+    #lightbox { display: none; position: fixed; inset: 0; background: rgba(20,18,15,.92); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+    #lightbox.open { display: flex; }
+    #lightbox-img { max-width: min(90vw,900px); max-height: 85vh; border-radius: 8px; object-fit: contain; }
+    #lightbox-caption { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.65); font-size: 13px; white-space: nowrap; }
+    #lightbox-close { position: absolute; top: 18px; right: 22px; color: rgba(255,255,255,.8); font-size: 32px; cursor: pointer; background: none; border: none; line-height: 1; }
+    #lightbox-prev, #lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: none; color: #fff; font-size: 28px; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    #lightbox-prev:hover, #lightbox-next:hover { background: rgba(255,255,255,.25); }
+    #lightbox-prev { left: 20px; } #lightbox-next { right: 20px; }
+    footer { text-align: center; padding: 36px; font-size: 12px; color: var(--muted); letter-spacing: .08em; border-top: 1px solid #e8e0d8; }
+    @media(max-width:600px){ header{padding:0 16px;} main{padding:36px 16px 60px;} .page-hero{flex-direction:column;gap:20px;} .hero-img{width:160px;height:160px;} .hero-text h1{font-size:36px;} }
+  </style>
+</head>
+<body>
+<header>
+  <a class="back-btn" href="index.html">← Back</a>
+  <div class="breadcrumb">Natsuko Mosaic &rsaquo; <span>Cooper</span></div>
+</header>
+<main>
+  <div class="page-hero">
+    <video class="hero-img" src="images/cooper/hero.mp4" autoplay loop muted playsinline></video>
+    <div class="hero-text"><h1>Cooper</h1><div class="count">7 Color Variations</div></div>
+  </div>
+  <div class="grid">
+    <div class="card" onclick="lb(0)"><img src="images/cooper/white.png" alt="white" loading="lazy"><div class="card-info"><div class="card-label">white</div></div></div>
+    <div class="card" onclick="lb(1)"><img src="images/cooper/remon.png" alt="lemon" loading="lazy"><div class="card-info"><div class="card-label">lemon</div></div></div>
+    <div class="card" onclick="lb(2)"><img src="images/cooper/pink.png" alt="pink" loading="lazy"><div class="card-info"><div class="card-label">pink</div></div></div>
+    <div class="card" onclick="lb(3)"><img src="images/cooper/beige.png" alt="beige" loading="lazy"><div class="card-info"><div class="card-label">beige</div></div></div>
+    <div class="card" onclick="lb(4)"><img src="images/cooper/black.png" alt="black" loading="lazy"><div class="card-info"><div class="card-label">black</div></div></div>
+    <div class="card" onclick="lb(5)"><img src="images/cooper/green_beige.png" alt="green beige" loading="lazy"><div class="card-info"><div class="card-label">green beige</div></div></div>
+    <div class="card" onclick="lb(6)"><img src="images/cooper/yellow.png" alt="yellow" loading="lazy"><div class="card-info"><div class="card-label">yellow</div></div></div>
+  </div>
+</main>
+<footer>&copy; Natsuko Mosaic Art — All Rights Reserved</footer>
+<div id="lightbox"><button id="lightbox-close" onclick="cl()">&times;</button><button id="lightbox-prev" onclick="mv(-1)">&#8249;</button><img id="lightbox-img" src="" alt=""><button id="lightbox-next" onclick="mv(1)">&#8250;</button><div id="lightbox-caption"></div></div>
+<script>
+const items=[
+  {s:'images/cooper/white.png',l:'Cooper — white'},
+  {s:'images/cooper/remon.png',l:'Cooper — lemon'},
+  {s:'images/cooper/pink.png',l:'Cooper — pink'},
+  {s:'images/cooper/beige.png',l:'Cooper — beige'},
+  {s:'images/cooper/black.png',l:'Cooper — black'},
+  {s:'images/cooper/green_beige.png',l:'Cooper — green beige'},
+  {s:'images/cooper/yellow.png',l:'Cooper — yellow'},
+];
+let cur=0;
+function lb(i){cur=i;upd();document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function cl(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function mv(d){cur=(cur+d+items.length)%items.length;upd();}
+function upd(){document.getElementById('lightbox-img').src=items[cur].s;document.getElementById('lightbox-caption').textContent=items[cur].l;}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))cl();});
+document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')cl();if(e.key==='ArrowLeft')mv(-1);if(e.key==='ArrowRight')mv(1);});
+</script>
+</body>
+</html>

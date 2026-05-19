@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bella — Natsuko Mosaic</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root { --bg: #f7f4f0; --surface: #fff; --text: #2c2824; --muted: #9a8f87; --accent: #c8a97e; --accent-dark: #9a7040; --radius: 12px; --shadow: 0 2px 16px rgba(44,36,28,.10); --shadow-hover: 0 8px 32px rgba(44,36,28,.18); }
+    body { font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif; background: var(--bg); color: var(--text); }
+    header { background: var(--surface); border-bottom: 1px solid #e8e0d8; padding: 0 48px; display: flex; align-items: center; height: 64px; gap: 24px; }
+    .back-btn { font-size: 13px; color: var(--accent-dark); text-decoration: none; letter-spacing: .06em; display: flex; align-items: center; gap: 6px; transition: opacity .2s; }
+    .back-btn:hover { opacity: .7; }
+    .breadcrumb { font-size: 13px; color: var(--muted); }
+    .breadcrumb span { color: var(--text); font-weight: 500; }
+    main { max-width: 1280px; margin: 0 auto; padding: 56px 32px 100px; }
+    .page-hero { display: flex; align-items: flex-end; gap: 40px; margin-bottom: 52px; }
+    .hero-img { width: 220px; height: 220px; object-fit: cover; border-radius: var(--radius); box-shadow: var(--shadow); flex-shrink: 0; }
+    .hero-text h1 { font-size: 48px; font-weight: 200; letter-spacing: .1em; margin-bottom: 10px; }
+    .hero-text .count { font-size: 14px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+    .card { background: var(--surface); border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); cursor: pointer; transition: transform .25s, box-shadow .25s; }
+    .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+    .card img { width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block; background: #ece8e2; }
+    .card-info { padding: 10px 14px 12px; }
+    .card-label { font-size: 12px; color: var(--muted); letter-spacing: .05em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #lightbox { display: none; position: fixed; inset: 0; background: rgba(20,18,15,.92); z-index: 1000; align-items: center; justify-content: center; padding: 24px; }
+    #lightbox.open { display: flex; }
+    #lightbox-img { max-width: min(90vw,900px); max-height: 85vh; border-radius: 8px; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,.5); }
+    #lightbox-caption { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.65); font-size: 13px; letter-spacing: .06em; white-space: nowrap; }
+    #lightbox-close { position: absolute; top: 18px; right: 22px; color: rgba(255,255,255,.8); font-size: 32px; cursor: pointer; background: none; border: none; line-height: 1; }
+    #lightbox-prev, #lightbox-next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,.12); border: none; color: #fff; font-size: 28px; width: 52px; height: 52px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background .2s; }
+    #lightbox-prev:hover, #lightbox-next:hover { background: rgba(255,255,255,.25); }
+    #lightbox-prev { left: 20px; } #lightbox-next { right: 20px; }
+    footer { text-align: center; padding: 36px; font-size: 12px; color: var(--muted); letter-spacing: .08em; border-top: 1px solid #e8e0d8; }
+    @media(max-width:600px){ header{padding:0 16px;} main{padding:36px 16px 60px;} .page-hero{flex-direction:column;gap:20px;} .hero-img{width:160px;height:160px;} .hero-text h1{font-size:36px;} }
+  </style>
+</head>
+<body>
+<header>
+  <a class="back-btn" href="index.html">← Back</a>
+  <div class="breadcrumb">Natsuko Mosaic &rsaquo; <span>Bella</span></div>
+</header>
+<main>
+  <div class="page-hero">
+    <video class="hero-img" src="images/bella/hero.mp4" autoplay loop muted playsinline></video>
+    <div class="hero-text">
+      <h1>Bella</h1>
+      <div class="count">9 Color Variations</div>
+    </div>
+  </div>
+  <div class="grid">
+    <div class="card" onclick="lb(0)"><img src="images/bella/Bella-cropped.png" alt="Bella" loading="lazy"><div class="card-info"><div class="card-label">Bella</div></div></div>
+    <div class="card" onclick="lb(1)"><img src="images/bella/mosaic_20260516_3x (1)-cropped.png" alt="color 1" loading="lazy"><div class="card-info"><div class="card-label">color 1</div></div></div>
+    <div class="card" onclick="lb(2)"><img src="images/bella/mosaic_20260516_3x (2)-cropped.png" alt="color 2" loading="lazy"><div class="card-info"><div class="card-label">color 2</div></div></div>
+    <div class="card" onclick="lb(3)"><img src="images/bella/mosaic_20260516_3x (3)-cropped.png" alt="color 3" loading="lazy"><div class="card-info"><div class="card-label">color 3</div></div></div>
+    <div class="card" onclick="lb(4)"><img src="images/bella/mosaic_20260516_3x (4)-cropped.png" alt="color 4" loading="lazy"><div class="card-info"><div class="card-label">color 4</div></div></div>
+    <div class="card" onclick="lb(5)"><img src="images/bella/mosaic_20260516_3x (5)-cropped.png" alt="color 5" loading="lazy"><div class="card-info"><div class="card-label">color 5</div></div></div>
+    <div class="card" onclick="lb(6)"><img src="images/bella/mosaic_20260516_3x (6)-cropped.png" alt="color 6" loading="lazy"><div class="card-info"><div class="card-label">color 6</div></div></div>
+    <div class="card" onclick="lb(7)"><img src="images/bella/mosaic_20260516_3x (7)-cropped.png" alt="color 7" loading="lazy"><div class="card-info"><div class="card-label">color 7</div></div></div>
+    <div class="card" onclick="lb(8)"><img src="images/bella/mosaic_20260516_3x-cropped.png" alt="color 8" loading="lazy"><div class="card-info"><div class="card-label">color 8</div></div></div>
+  </div>
+</main>
+<footer>&copy; Natsuko Mosaic Art — All Rights Reserved</footer>
+<div id="lightbox"><button id="lightbox-close" onclick="cl()">&times;</button><button id="lightbox-prev" onclick="mv(-1)">&#8249;</button><img id="lightbox-img" src="" alt=""><button id="lightbox-next" onclick="mv(1)">&#8250;</button><div id="lightbox-caption"></div></div>
+<script>
+const items=[
+  {s:'images/bella/Bella-cropped.png',l:'Bella'},
+  {s:'images/bella/mosaic_20260516_3x (1)-cropped.png',l:'Bella — color 1'},
+  {s:'images/bella/mosaic_20260516_3x (2)-cropped.png',l:'Bella — color 2'},
+  {s:'images/bella/mosaic_20260516_3x (3)-cropped.png',l:'Bella — color 3'},
+  {s:'images/bella/mosaic_20260516_3x (4)-cropped.png',l:'Bella — color 4'},
+  {s:'images/bella/mosaic_20260516_3x (5)-cropped.png',l:'Bella — color 5'},
+  {s:'images/bella/mosaic_20260516_3x (6)-cropped.png',l:'Bella — color 6'},
+  {s:'images/bella/mosaic_20260516_3x (7)-cropped.png',l:'Bella — color 7'},
+  {s:'images/bella/mosaic_20260516_3x-cropped.png',l:'Bella — color 8'},
+];
+let cur=0;
+function lb(i){cur=i;upd();document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function cl(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+function mv(d){cur=(cur+d+items.length)%items.length;upd();}
+function upd(){document.getElementById('lightbox-img').src=items[cur].s;document.getElementById('lightbox-caption').textContent=items[cur].l;}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target===document.getElementById('lightbox'))cl();});
+document.addEventListener('keydown',e=>{if(!document.getElementById('lightbox').classList.contains('open'))return;if(e.key==='Escape')cl();if(e.key==='ArrowLeft')mv(-1);if(e.key==='ArrowRight')mv(1);});
+</script>
+</body>
+</html>

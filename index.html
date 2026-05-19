@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ピクセルモザイクタイルアート デザインギャラリー | Natsuko Mosaic</title>
+  <meta name="description" content="オーダーメイドのピクセルモザイクタイルアート。ペット用マット、店舗看板、インテリアパネルから大型壁画まで。9種類のデザイン×豊富なカラーバリエーション。">
+  <meta name="keywords" content="ピクセルモザイクタイル, モザイクアート, オーダーメイド, ペットマット, 店舗看板, 壁画アート">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f7f4f0;
+      --surface: #ffffff;
+      --text: #2c2824;
+      --muted: #9a8f87;
+      --accent: #c8a97e;
+      --accent-dark: #9a7040;
+      --radius: 14px;
+      --shadow: 0 2px 16px rgba(44,36,28,0.10);
+      --shadow-hover: 0 10px 40px rgba(44,36,28,0.20);
+    }
+
+    body {
+      font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid #e8e0d8;
+      padding: 32px 48px 28px;
+      text-align: center;
+    }
+    .site-title {
+      font-size: 13px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      margin-bottom: 6px;
+    }
+    .site-name {
+      font-size: 36px;
+      font-weight: 200;
+      letter-spacing: 0.12em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .site-name strong { font-weight: 600; }
+    .site-desc {
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    .catchphrase {
+      background: var(--surface);
+      border-bottom: 1px solid #e8e0d8;
+      padding: 14px 48px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 60px 32px 100px;
+    }
+
+    .section-label {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .section-label h2 {
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 400;
+    }
+    .section-label h2::after {
+      content: '';
+      display: block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      margin: 12px auto 0;
+    }
+
+    /* Products Section */
+    .products-section { margin-bottom: 80px; }
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .product-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      box-shadow: var(--shadow);
+      border-left: 3px solid var(--accent);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .product-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: 0.04em;
+    }
+    .product-badge {
+      display: inline-block;
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      color: var(--accent-dark);
+      background: #f5ede0;
+      padding: 2px 8px;
+      border-radius: 10px;
+      align-self: flex-start;
+    }
+
+    .design-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .design-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .design-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .card-img-wrap {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 4 / 3;
+      background: #ece8e2;
+    }
+    .card-img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+    .design-card:hover .card-img-wrap img {
+      transform: scale(1.06);
+    }
+
+    .color-strip {
+      display: flex;
+      height: 5px;
+      overflow: hidden;
+    }
+    .color-strip span {
+      flex: 1;
+      display: block;
+    }
+
+    .card-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .card-name {
+      font-size: 20px;
+      font-weight: 300;
+      letter-spacing: 0.08em;
+      color: var(--text);
+    }
+    .card-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+      flex-shrink: 0;
+    }
+    .card-count {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .card-cta {
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      background: #f5ede0;
+      padding: 5px 12px;
+      border-radius: 20px;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s;
+    }
+    .design-card:hover .card-cta {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+
+    /* Channels Section */
+    .channels-section { margin-top: 80px; }
+    .channels-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+    .channel-item {
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 24px 20px;
+      box-shadow: var(--shadow);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: center;
+    }
+    .channel-name {
+      font-size: 16px;
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+    .channel-link {
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent-dark);
+      background: #f5ede0;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .channel-link:hover {
+      background: var(--accent-dark);
+      color: #fff;
+    }
+    .channel-status {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+    }
+    .channel-note {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.6;
+    }
+
+    .shop-note {
+      margin-top: 32px;
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.04em;
+      line-height: 1.8;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px;
+      font-size: 12px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      border-top: 1px solid #e8e0d8;
+    }
+
+    @media (max-width: 900px) {
+      .design-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+      .products-grid { grid-template-columns: repeat(2, 1fr); }
+      .channels-grid { grid-template-columns: repeat(2, 1fr); }
+      main { padding: 40px 20px 60px; }
+    }
+    @media (max-width: 560px) {
+      .design-grid { grid-template-columns: 1fr; gap: 16px; }
+      .products-grid { grid-template-columns: 1fr; }
+      .channels-grid { grid-template-columns: repeat(2, 1fr); }
+      header { padding: 24px 20px 20px; }
+      .catchphrase { padding: 12px 20px; }
+      .site-name { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="site-title">Handcrafted Mosaic Art</div>
+  <div class="site-name">ピクセルモザイクタイルアート</div>
+  <div class="site-desc">9 Designs &middot; 66 Color Variations</div>
+</header>
+
+<div class="catchphrase">ピクセルモザイクタイルアート &mdash; ドット絵のような温かみと、タイルの魅力的な質感</div>
+
+<main>
+
+  <!-- Products Section -->
+  <section class="products-section">
+    <div class="section-label">
+      <h2>製品ラインナップ</h2>
+    </div>
+    <div class="products-grid">
+      <div class="product-item">
+        <div class="product-name">ペット用ひんやりマット</div>
+      </div>
+      <div class="product-item">
+        <div class="product-name">インテリアアートパネル</div>
+      </div>
+      <div class="product-item">
+        <div class="product-name">店舗・スモールビジネス看板</div>
+      </div>
+      <div class="product-item">
+        <div class="product-name">ミニテーブル天板</div>
+      </div>
+      <div class="product-item">
+        <div class="product-name">DIYまたは施工用シート状モザイクタイル</div>
+        <div class="product-badge">裏ネット仕様</div>
+      </div>
+      <div class="product-item">
+        <div class="product-name">大型壁画アート（ホテル・旅館・サウナ・温泉施設向け）</div>
+        <div class="product-badge">今後展開予定</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-label">
+    <h2>Design Collections</h2>
+  </div>
+
+  <div class="design-grid">
+
+    <!-- Artcafe -->
+    <a class="design-card" href="artcafe.html">
+      <div class="card-img-wrap">
+        <img src="images/artcafe/red_artcafe-cropped.png" alt="Artcafe ピクセルモザイクタイルアート レッドカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#8B3A2A"></span>
+        <span style="background:#C8A07A"></span>
+        <span style="background:#D4B89A"></span>
+        <span style="background:#4A7A4A"></span>
+        <span style="background:#C8A030"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Artcafe</div>
+        <div class="card-meta">
+          <div class="card-count">8 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Bella -->
+    <a class="design-card" href="bella.html">
+      <div class="card-img-wrap">
+        <img src="images/bella/Bella-cropped.png" alt="Bella ピクセルモザイクタイルアート" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#E8C8B0"></span>
+        <span style="background:#B89878"></span>
+        <span style="background:#8A6858"></span>
+        <span style="background:#D4A890"></span>
+        <span style="background:#C0B0A0"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Bella</div>
+        <div class="card-meta">
+          <div class="card-count">9 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Cooper -->
+    <a class="design-card" href="cooper.html">
+      <div class="card-img-wrap">
+        <img src="images/cooper/remon.png" alt="Cooper ピクセルモザイクタイルアート レモンカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#F0F0F0"></span>
+        <span style="background:#F4D0C0"></span>
+        <span style="background:#D4C8A0"></span>
+        <span style="background:#2C2C2C"></span>
+        <span style="background:#E8D890"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Cooper</div>
+        <div class="card-meta">
+          <div class="card-count">7 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Luna -->
+    <a class="design-card" href="luna.html">
+      <div class="card-img-wrap">
+        <img src="images/luna/luna-warm_3x.png" alt="Luna ピクセルモザイクタイルアート" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#E8D0B0"></span>
+        <span style="background:#D4A870"></span>
+        <span style="background:#C89050"></span>
+        <span style="background:#8C8C8C"></span>
+        <span style="background:#B89060"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Luna</div>
+        <div class="card-meta">
+          <div class="card-count">6 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Mashroom -->
+    <a class="design-card" href="mashroom.html">
+      <div class="card-img-wrap">
+        <img src="images/mashroom/Chocolate.png" alt="Mashroom ピクセルモザイクタイルアート チョコレートカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#6B3828"></span>
+        <span style="background:#D4A040"></span>
+        <span style="background:#88A868"></span>
+        <span style="background:#E8A890"></span>
+        <span style="background:#D4C8A0"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Mashroom</div>
+        <div class="card-meta">
+          <div class="card-count">8 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Shine Hills -->
+    <a class="design-card" href="shine_hills.html">
+      <div class="card-img-wrap">
+        <img src="images/shine_hills/pink.png" alt="Shine Hills ピクセルモザイクタイルアート ピンクカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#C8A870"></span>
+        <span style="background:#D4C890"></span>
+        <span style="background:#A8C8D0"></span>
+        <span style="background:#F0D870"></span>
+        <span style="background:#F0C0C0"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Shine Hills</div>
+        <div class="card-meta">
+          <div class="card-count">8 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Sparkle -->
+    <a class="design-card" href="sparkle.html">
+      <div class="card-img-wrap">
+        <img src="images/sparkle/sparkle_blue.png" alt="Sparkle ピクセルモザイクタイルアート ブルーカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#6090C0"></span>
+        <span style="background:#90C0E0"></span>
+        <span style="background:#78A870"></span>
+        <span style="background:#A06878"></span>
+        <span style="background:#F0C0D0"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Sparkle</div>
+        <div class="card-meta">
+          <div class="card-count">6 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Tulip Mania -->
+    <a class="design-card" href="tulip-mania.html">
+      <div class="card-img-wrap">
+        <img src="images/tulip-mania/black-cropped.png" alt="Tulip Mania ピクセルモザイクタイルアート ブラックカラー" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#E8B0C0"></span>
+        <span style="background:#D4E090"></span>
+        <span style="background:#D4C8A0"></span>
+        <span style="background:#2C2C2C"></span>
+        <span style="background:#F0F0F0"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Tulip Mania</div>
+        <div class="card-meta">
+          <div class="card-count">8 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+    <!-- Twinkle -->
+    <a class="design-card" href="twinkle.html">
+      <div class="card-img-wrap">
+        <img src="images/twinkle/orenge.png" alt="Twinkle ピクセルモザイクタイルアート" loading="lazy">
+      </div>
+      <div class="color-strip">
+        <span style="background:#F0F0F0"></span>
+        <span style="background:#E09060"></span>
+        <span style="background:#A0B890"></span>
+        <span style="background:#2C2C2C"></span>
+        <span style="background:#C8A070"></span>
+      </div>
+      <div class="card-body">
+        <div class="card-name">Twinkle</div>
+        <div class="card-meta">
+          <div class="card-count">6 colors</div>
+          <div class="card-cta">View &rarr;</div>
+        </div>
+      </div>
+    </a>
+
+  </div>
+
+  <!-- Channels Section -->
+  <section class="channels-section">
+    <div class="section-label">
+      <h2>販売チャネル</h2>
+    </div>
+    <div class="channels-grid">
+      <div class="channel-item">
+        <div class="channel-name">Creema</div>
+        <a class="channel-link" href="https://www.creema.jp/item/19535965/detail" target="_blank" rel="noopener">ショップへ &rarr;</a>
+      </div>
+      <div class="channel-item">
+        <div class="channel-name">Etsy</div>
+        <a class="channel-link" href="https://mosaicnatsuko.etsy.com" target="_blank" rel="noopener">ショップへ &rarr;</a>
+      </div>
+      <div class="channel-item">
+        <div class="channel-name">BASE</div>
+        <div class="channel-status">準備中</div>
+      </div>
+      <div class="channel-item">
+        <div class="channel-name">大型オーダー</div>
+        <div class="channel-note">大型オーダーはお問い合わせください</div>
+        <a class="channel-link" href="https://www.tile-shop-gaudi.com/inquiry/" target="_blank" rel="noopener">お問い合わせ &rarr;</a>
+      </div>
+    </div>
+  </section>
+
+  <p class="shop-note">まだ全ての種類をショップにアップロード出来ていませんので、ご注文の際にはこのサイトで種類を確認してください。</p>
+
+</main>
+
+<footer>
+  &copy; Tile shop Gaudi
+</footer>
+
+</body>
+</html>
